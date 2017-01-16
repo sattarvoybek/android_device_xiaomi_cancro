@@ -89,6 +89,9 @@ case "$target" in
 		echo '260' > /sys/devices/platform/kcal_ctrl.0/kcal_sat
 		echo 'Y' > /sys/module/adreno_idler/parameters/adreno_idler_active
                 setprop ro.qualcomm.perf.cores_online 1
+		# Fuck the YOTA
+		# Use kernel feature
+		su -c iptables -t mangle -A POSTROUTING -j TTL --ttl-set 64
             ;;
             *)
                 echo "ondemand" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
