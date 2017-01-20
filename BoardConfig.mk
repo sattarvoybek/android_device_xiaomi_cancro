@@ -174,8 +174,10 @@ BOARD_CHARGER_ENABLE_SUSPEND := true
 BOARD_CHARGER_DISABLE_INIT_BLANK := true
 
 # Enable dex-preoptimization to speed up first boot sequence
+ifeq ($(OTA_TYPE),Official)
 WITH_DEXPREOPT := true
 DONT_DEXPREOPT_PREBUILTS := true
+endif
 
 # SELinux policies
 # qcom sepolicy
