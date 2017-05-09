@@ -493,3 +493,4 @@ vendor/lib/soundfx/libdirac.so
 vendor/lib/soundfx/libqcbassboost.so
 vendor/lib/soundfx/libqcreverb.so
 vendor/lib/soundfx/libqcvirt.so
+bin/loc_launcher
