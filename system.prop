@@ -65,7 +65,6 @@ ro.qualcomm.perf.cores_online=1
 dalvik.vm.dex2oat-swap=false
 dalvik.vm.boot-dex2oat-threads=4
 dalvik.vm.dex2oat-threads=3
-ro.gps.agps_provider=1
 persist.debug.wfd.enable=1
 persist.demo.hdmirotationlock=false
 ro.hdmi.enable=true
@@ -95,3 +94,7 @@ ro.qualcomm.bluetooth.opp=true
 ro.qualcomm.bluetooth.pbap=true
 
 ro.sys.sdcardfs=true
+
+# GPS
+persist.gps.qc_nlp_in_use=0
+ro.gps.agps_provider=1
