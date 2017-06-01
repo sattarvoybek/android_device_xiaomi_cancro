@@ -195,6 +195,9 @@ BOARD_CHARGER_DISABLE_INIT_BLANK := true
 
 # Enable real time lockscreen charging current values
 BOARD_GLOBAL_CFLAGS += -DBATTERY_REAL_INFO
+
+# Include path
+TARGET_SPECIFIC_HEADER_PATH := $(CANCRO_PATH)/include
  
 # Enable dex-preoptimization to speed up first boot sequence
 ifeq ($(OTA_TYPE),Official)
