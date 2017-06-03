@@ -255,9 +255,6 @@ case "$target" in
         echo 0 > /dev/cpuctl/apps/cpu.notify_on_migrate
         start mpdecision
         setprop sys.perf.profile `getprop sys.perf.profile`
-	#permissions for charger_monitor
-	chmod -h 660 /sys/power/wake_lock
-	chown radio.system /sys/power/wake_lock
     ;;
 esac
 
