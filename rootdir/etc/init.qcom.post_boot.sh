@@ -1,5 +1,5 @@
 #!/system/bin/sh
-# Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
+# Copyright (c) 2012-2013, 2016, The Linux Foundation. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -74,25 +74,22 @@ case "$target" in
                 echo "interactive" > /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor
                 echo "19000 1400000:35000 1800000:19000" > /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay
                 echo 95 > /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load
-                echo 1497600 > /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq
-                echo 1497600 > /sys/devices/system/cpu/cpufreq/interactive/input_boost_freq
+                echo 1190400 > /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq
                 echo 1 > /sys/devices/system/cpu/cpufreq/interactive/io_is_busy
                 echo "50 1300000:60 1500000:70 1800000:80 2000000:90" > /sys/devices/system/cpu/cpufreq/interactive/target_loads
                 echo 30000 > /sys/devices/system/cpu/cpufreq/interactive/min_sample_time
                 echo 40000 > /sys/devices/system/cpu/cpufreq/interactive/timer_rate
                 echo 20 > /sys/module/cpu_boost/parameters/boost_ms
-                echo 1728000 > /sys/module/cpu_boost/parameters/sync_threshold
+                echo 0 > /sys/module/cpu_boost/parameters/sync_threshold
                 echo 99000 > /sys/devices/system/cpu/cpufreq/interactive/sampling_down_factor
+                echo 0 > /sys/module/cpu_boost/parameters/input_boost_freq
                 echo 40 > /sys/module/cpu_boost/parameters/input_boost_ms
-                # some tuning
-                echo '1' > /sys/kernel/fast_charge/force_fast_charge
-                echo '260' > /sys/devices/platform/kcal_ctrl.0/kcal_sat
-                echo 'Y' > /sys/module/adreno_idler/parameters/adreno_idler_active
-                setprop ro.qualcomm.perf.cores_online 1
+                echo 1 > /sys/kernel/fast_charge/force_fast_charge
+                setprop ro.qualcomm.perf.cores_online 2
                 # Fuck the YOTA
                 # Use kernel feature
                 su -c iptables -t mangle -A POSTROUTING -j TTL --ttl-set 64
-				
+
 				# Stripalov TCP fix for cancro. All rights reserved © 2016
 				busybox sysctl -w net.ipv4.tcp_timestamps=0
 				busybox sysctl -w net.ipv4.tcp_tw_reuse=1
@@ -187,6 +184,7 @@ case "$target" in
 				echo 15 > /proc/`busybox pidof com.google.android.inputmethod.latin`/oom_adj
 				# Fix Settings
 				echo 15 > /proc/`busybox pidof com.android.settings`/oom_adj
+
             ;;
             *)
                 echo "ondemand" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
@@ -207,6 +205,10 @@ case "$target" in
             ;;
         esac
         echo 1 > /sys/kernel/msm_thermal/enabled
+        echo 268800 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+        echo 268800 > /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq
+        echo 268800 > /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq
+        echo 268800 > /sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq
         chown -h root.system /sys/devices/system/cpu/mfreq
         chmod -h 220 /sys/devices/system/cpu/mfreq
         chown -h root.system /sys/devices/system/cpu/cpu1/online
@@ -238,7 +240,7 @@ case "$target" in
         chown system.system /sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq
         chown system.system /sys/devices/system/cpu/cpu3/cpufreq/sys_cap_freq
         chown system.system /sys/devices/system/cpu/cpu3/cpufreq/thermal_cap_freq
-        echo 2 > /sys/devices/system/cpu/sched_mc_power_savings
+        echo 0 > /sys/devices/system/cpu/sched_mc_power_savings
         chown system.system /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay
         chown system.system /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load
         chown system.system /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq
@@ -255,24 +257,15 @@ case "$target" in
         echo 0 > /dev/cpuctl/apps/cpu.notify_on_migrate
         start mpdecision
         setprop sys.perf.profile `getprop sys.perf.profile`
+
     ;;
 esac
 
-emmc_boot=`getprop ro.boot.emmc`
-case "$emmc_boot"
-    in "true")
-        chown -h system /sys/devices/platform/rs300000a7.65536/force_sync
-        chown -h system /sys/devices/platform/rs300000a7.65536/sync_sts
-        chown -h system /sys/devices/platform/rs300100a7.65536/force_sync
-        chown -h system /sys/devices/platform/rs300100a7.65536/sync_sts
-    ;;
-esac
-
-# Post-setup services
 case "$target" in
     "msm8974")
-        echo 896 > /sys/block/mmcblk0/bdi/read_ahead_kb
-    ;;
+         rm /data/system/perfd/default_values
+         echo 896 > /sys/block/mmcblk0/bdi/read_ahead_kb
+	;;
 esac
 
 case "$target" in
@@ -290,5 +283,39 @@ case "$target" in
         echo $image_version > /sys/devices/soc0/image_version
         echo $image_variant > /sys/devices/soc0/image_variant
         echo $oem_version > /sys/devices/soc0/image_crm_version
+	;;
+esac
+
+chown -h system /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate
+chown -h system /sys/devices/system/cpu/cpufreq/ondemand/sampling_down_factor
+chown -h system /sys/devices/system/cpu/cpufreq/ondemand/io_is_busy
+
+emmc_boot=`getprop ro.boot.emmc`
+case "$emmc_boot"
+    in "true")
+        chown -h system /sys/devices/platform/rs300000a7.65536/force_sync
+        chown -h system /sys/devices/platform/rs300000a7.65536/sync_sts
+        chown -h system /sys/devices/platform/rs300100a7.65536/force_sync
+        chown -h system /sys/devices/platform/rs300100a7.65536/sync_sts
+    ;;
+esac
+
+# Post-setup services
+case "$target" in
+    "msm8974")
+        start mpdecision
+        echo 512 > /sys/block/mmcblk0/bdi/read_ahead_kb
+    ;;
+esac
+
+# Change console log level as per console config property
+console_config=`getprop persist.console.silent.config`
+case "$console_config" in
+    "1")
+        echo "Enable console config to $console_config"
+        echo 0 > /proc/sys/kernel/printk
+        ;;
+    *)
+        echo "Enable console config to $console_config"
         ;;
 esac
