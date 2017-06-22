@@ -93,3 +93,61 @@ ro.qualcomm.bluetooth.opp=true
 ro.qualcomm.bluetooth.pbap=true
 
 ro.sys.sdcardfs=false
+
+# Enalbe modem fast dormancy function
+persist.env.fastdorm.enabled=true
+persist.data.tcp_rst_drop=true
+persist.radio.data_no_toggle=1
+persist.fd.scroff.timer=3000
+persist.fd.scron.timer=10000
+
+#Qcril ignore service domain camped status for 5 senconds.
+persist.radio.ignore_dom_time=5
+
+# Network tweaks
+net.tcp.buffersize.default 6144,87380,110208,6144,16384,110208
+net.tcp.buffersize.wifi 262144,524288,1048576,262144,524288,1048576
+net.tcp.buffersize.lte 262144,524288,3145728,262144,524288,3145728
+net.tcp.buffersize.hsdpa 6144,262144,1048576,6144,262144,1048576
+net.tcp.buffersize.hsupa 6144,262144,1048576,6144,262144,1048576
+net.tcp.buffersize.hspap 6144,262144,1048576,6144,262144,1048576
+net.tcp.buffersize.evdo 6144,262144,1048576,6144,262144,1048576
+net.tcp.buffersize.umts 6144,87380,110208,6144,16384,110208
+net.tcp.buffersize.hspa 6144,87380,262144,6144,16384,262144
+net.tcp.buffersize.gprs 6144,8760,11680,6144,8760,11680
+net.tcp.buffersize.edge 6144,26280,35040,6144,16384,35040
+ro.ril.hsxpa=2
+ro.ril.gprsclass=10
+ro.ril.hep=1
+ro.ril.enable.dtm=1
+ro.ril.hsdpa.category=10
+ro.ril.enable.a53=1
+ro.ril.enable.3g.prefix=1
+ro.ril.hsupa.category=7
+ro.ril.hsdpa.category=10
+ro.ril.enable.a52=1
+ro.ril.set.mtu1472=1
+persist.cust.tel.eons=1
+ro.ril.enable.fd.plmn.prefix 23402,23410,23411
+net.rmnet0.dns1 8.8.8.8
+net.rmnet0.dns2 8.8.4.4
+net.dns1 8.8.8.8
+net.dns2 8.8.4.4
+net.ppp0.dns1 8.8.8.8
+net.ppp0.dns2 8.8.4.4
+net.wlan0.dns1 8.8.8.8
+net.wlan0.dns2 8.8.4.4
+net.eth0.dns1 8.8.8.8
+net.eth0.dns2 8.8.4.4
+net.gprs.dns1 8.8.8.8
+net.gprs.dns2 8.8.4.4
+
+# Battery tweaks
+ro.mot.eri.losalert.delay 1000
+ro.ril.disable.power.collapse 1
+pm.sleep_mode 2
+wifi.supplicant_scan_interval 180
+power_supply.wakeup enable
+power.saving.mode 1
+ro.config.hw_power_saving 1
+ro.vold.umsdirtyratio 20
