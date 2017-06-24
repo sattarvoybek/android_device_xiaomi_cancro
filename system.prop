@@ -12,7 +12,6 @@ wifi.interface=wlan0
 persist.data.netmgrd.qos.enable=true
 persist.data.tcpackprio.enable=true
 ro.data.large_tcp_window_size=true
-persist.cne.feature=0
 
 ro.fm.transmitter=false
 
@@ -94,7 +93,3 @@ ro.qualcomm.bluetooth.opp=true
 ro.qualcomm.bluetooth.pbap=true
 
 ro.sys.sdcardfs=true
-
-# GPS
-persist.gps.qc_nlp_in_use=0
-ro.gps.agps_provider=1
