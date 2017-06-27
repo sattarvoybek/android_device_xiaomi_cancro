@@ -95,7 +95,7 @@ ro.qualcomm.bluetooth.pbap=true
 ro.sys.sdcardfs=false
 
 # Enalbe modem fast dormancy function
-persist.env.fastdorm.enabled=true
+persist.env.fastdorm.enabled=false
 persist.data.tcp_rst_drop=true
 persist.radio.data_no_toggle=1
 persist.fd.scroff.timer=3000
