@@ -92,4 +92,4 @@ ro.qualcomm.bluetooth.nap=true
 ro.qualcomm.bluetooth.opp=true
 ro.qualcomm.bluetooth.pbap=true
 
-ro.sys.sdcardfs=true
+ro.sys.sdcardfs=false
