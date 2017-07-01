@@ -352,8 +352,8 @@ vendor/lib/mediadrm/libdrmclearkeyplugin.so
 
 # Firmware
 lib/libstm-log.so
-vendor/firmware/bcm2079x-b5_firmware.ncd
-vendor/firmware/bcm2079x-b5_pre_firmware.ncd
+vendor/firmware/BCM20791B5_002.006.013.0011.0104_Customers_China_NCD_Unsigned_configdata.ncd
+vendor/firmware/PreI2C_v470.ncd
 vendor/firmware/keymaster/keymaster.b00
 vendor/firmware/keymaster/keymaster.b01
 vendor/firmware/keymaster/keymaster.b02
@@ -367,17 +367,12 @@ bin/fm_qsoc_patches
 bin/loc_launcher
 bin/quipc_igsn
 bin/quipc_main
-lib/hw/gps.msm8974.so
 lib/libloc_api_v02.so
 lib/libloc_ds_api.so
-lib/libgps.utils.so
-lib/libloc_core.so
-lib/libloc_eng.so
 vendor/lib/hw/flp.default.so
 vendor/lib/libgeofence.so
 vendor/lib/libizat_core.so
 vendor/lib/liblbs_core.so
-vendor/lib/liblocationservice.so
 vendor/lib/libquipc_os_api.so
 vendor/lib/libquipc_ulp_adapter.so
 vendor/lib/libulp2.so
