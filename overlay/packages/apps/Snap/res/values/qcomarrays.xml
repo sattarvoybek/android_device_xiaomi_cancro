@@ -36,4 +36,7 @@
         <item>hfr120</item>
     </string-array>
 
+<string name="pref_camera_jpegquality_key" translatable="false">100</string>
+<string name="pref_camera_denoise_key" translatable="false">off</string>
+<string name="pref_camera_shuttersound_key" translatable="false">off</string>
 </resources>
