@@ -354,4 +354,6 @@
         <item>"/data/dalvik-cache/arm/system@framework@services.jar@classes.dex"</item>
    </string-array>
 
+    <!-- Night display  -->
+    <bool name="config_nightDisplayAvailable">true</bool>
 </resources>
